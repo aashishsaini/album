@@ -1,0 +1,34 @@
+<h1>Your Albums</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image </th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @albums.each do |album| %>
+  <tr>
+    <td><%= (album.name).capitalize %></td>
+<div class="field" , height= 500px ,  width =200px >     
+<td><%= album.description %></td>
+</div>
+<div class ="image" ,height = 500px , width = 300px >   
+ <td><% if album.image.exists? then %>
+	<%= image_tag album.image.url(:small) %>
+<% end %> </td>
+</div>
+
+    <td><%= link_to 'Show', album %></td>
+    <td><%= link_to 'Edit', edit_album_path(album) %></td>
+    <td><%= link_to 'Destroy', album, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Create New Album', new_album_path %>

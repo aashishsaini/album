@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h3><b>Album Name:
+  <%= (@album.name).capitalize %></b></h3>
+</p>
+
+
+
+<p>
+ <% if @album.image.exists? then %>
+	<%= image_tag @album.image.url(:small) %>
+<% end %> 
+ 
+</p>
+<p>
+  <b>Tags:</b>
+  <%= join_tags(@album) %>
+
+</p>
+<%= link_to 'Add or Remove Tags', edit_album_path(@album) %>
+
+<h2>Your Album</h2>
+<table>
+<% @album.photos.each do |photo| %>
+
+<td>
+  <div class="image", height =500px , width =200px >  
+  <p>
+     <% if photo.image_url.exists? then %>
+	<%= image_tag photo.image_url.url(:small) %>
+<% end %>
+
+  </p>
+<p>
+  <%= link_to 'Destroy Photo', [photo.album, photo],
+               :confirm => 'Are you sure?',
+               :method => :delete %>
+</p>
+</div>
+</td>
+
+
+<% end %>
+</table>
+
+<h2>Add photos to your album:</h2>
+<%= render "photos/form" %>
+
+
+
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Back', albums_path %>
